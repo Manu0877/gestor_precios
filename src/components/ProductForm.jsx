@@ -1,60 +1,86 @@
-import React, { useState } from 'react'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../firebase'
+import React, { useState } from "react";
+import { db } from "../firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function ProductForm() {
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-  const [market, setMarket] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [msg, setMsg] = useState('')
+  const [nombre, setNombre] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [supermercado, setSupermercado] = useState(""); // nuevo campo
+  const [fechaCompra, setFechaCompra] = useState("");
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    if (!name.trim() || !market.trim() || !price) {
-      setMsg('Rellena nombre, precio y supermercado.')
-      return
-    }
-    const parsedPrice = parseFloat(price)
-    if (Number.isNaN(parsedPrice) || parsedPrice < 0) {
-      setMsg('Precio inválido')
-      return
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!nombre || !precio || !supermercado || !fechaCompra) {
+      alert("Completa todos los campos");
+      return;
     }
 
-    setLoading(true)
-    setMsg('')
+    const nuevoProducto = {
+      nombre,
+      precio: parseFloat(precio),
+      supermercado,
+      fechaCompra,
+    };
+
     try {
-      await addDoc(collection(db, 'products'), {
-        name: name.trim(),
-        price: parsedPrice,
-        market: market.trim(),
-        createdAt: serverTimestamp()
-      })
-      setName('')
-      setPrice('')
-      setMarket('')
-      setMsg('Producto añadido ✅')
-    } catch (err) {
-      console.error(err)
-      setMsg('Error al guardar')
+      await addDoc(collection(db, "productos"), nuevoProducto);
+      setNombre("");
+      setPrecio("");
+      setSupermercado("");
+      setFechaCompra("");
+      alert("Producto añadido correctamente");
+    } catch (error) {
+      console.error("Error al añadir producto:", error);
     }
-    setLoading(false)
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 8 }}>
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre del producto" />
-      <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio (ej. 1.99)" />
-      <input value={market} onChange={(e) => setMarket(e.target.value)} placeholder="Supermercado" />
-      <div style={{ display: 'flex', gap: 8 }}>
-        <button disabled={loading} type="submit" style={{ padding: '8px 12px' }}>
-          {loading ? 'Guardando...' : 'Añadir'}
-        </button>
-        <button type="button" onClick={() => { setName(''); setPrice(''); setMarket(''); setMsg('') }} style={{ padding: '8px 12px' }}>
-          Limpiar
-        </button>
-      </div>
-      {msg && <div style={{ color: msg.includes('Error') ? 'crimson' : 'green' }}>{msg}</div>}
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", gap: 12 }}
+    >
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        style={{ padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
+      />
+      <input
+        type="number"
+        placeholder="Precio"
+        value={precio}
+        onChange={(e) => setPrecio(e.target.value)}
+        style={{ padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
+      />
+      <input
+        type="text"
+        placeholder="Supermercado"
+        value={supermercado}
+        onChange={(e) => setSupermercado(e.target.value)}
+        style={{ padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
+      />
+      <input
+        type="date"
+        placeholder="Fecha de compra"
+        value={fechaCompra}
+        onChange={(e) => setFechaCompra(e.target.value)}
+        style={{ padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
+      />
+      <button
+        type="submit"
+        style={{
+          padding: "10px 16px",
+          borderRadius: 4,
+          border: "none",
+          backgroundColor: "#1976d2",
+          color: "#fff",
+          cursor: "pointer",
+        }}
+      >
+        Añadir producto
+      </button>
     </form>
-  )
+  );
 }
