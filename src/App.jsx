@@ -8,7 +8,6 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 export default function App() {
   const [user, setUser] = useState(null);
   const [filterName, setFilterName] = useState('');
-  const [filterFecha, setFilterFecha] = useState(''); // Nuevo filtro por fecha
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
@@ -33,7 +32,6 @@ export default function App() {
     border: '1px solid #ddd',
     borderRadius: 8,
     backgroundColor: '#f9f9f9',
-    boxSizing: 'border-box',
   };
 
   const filterContainerStyle = {
@@ -48,8 +46,6 @@ export default function App() {
     padding: 8,
     borderRadius: 4,
     border: '1px solid #ccc',
-    minWidth: 120,
-    boxSizing: 'border-box',
   };
 
   const buttonStyle = {
@@ -73,12 +69,12 @@ export default function App() {
 
       <div style={logoutStyle}>
         <button onClick={() => signOut(auth)} style={{ ...buttonStyle, backgroundColor: '#d32f2f' }}>
-          Cerrar sesión
+          Cerrar sesiÃ³n
         </button>
       </div>
 
       <section style={sectionStyle}>
-        <h2>Añadir Producto</h2>
+        <h2>AÃ±adir Producto</h2>
         <ProductForm />
       </section>
 
@@ -91,21 +87,14 @@ export default function App() {
             onChange={(e) => setFilterName(e.target.value)}
             style={inputStyle}
           />
-          <input
-            type="date"
-            placeholder="Filtrar por fecha de compra"
-            value={filterFecha}
-            onChange={(e) => setFilterFecha(e.target.value)}
-            style={inputStyle}
-          />
-          <button onClick={() => { setFilterName(''); setFilterFecha(''); }} style={buttonStyle}>
+          <button onClick={() => setFilterName('')} style={buttonStyle}>
             Limpiar filtros
           </button>
         </div>
       </section>
 
       <section style={{ margin: '16px 0' }}>
-        <ProductList filterName={filterName} filterFecha={filterFecha} />
+        <ProductList filterName={filterName} />
       </section>
     </div>
   );
