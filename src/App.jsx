@@ -38,13 +38,8 @@ export default function App() {
             onChange={(e) => setFilterName(e.target.value)}
             style={{ flex: 1, padding: 8 }}
           />
-          <input
-            placeholder="Filtrar por supermercado (nombre exacto)"
-            value={filterMarket}
-            onChange={(e) => setFilterMarket(e.target.value)}
-            style={{ width: 240, padding: 8 }}
-          />
-          <button onClick={() => { setFilterName(''); setFilterMarket('') }} style={{ padding: '8px 12px' }}>
+          
+          <button onClick={() => { setFilterName('') }} style={{ padding: '8px 12px' }}>
             Limpiar filtros
           </button>
         </div>
