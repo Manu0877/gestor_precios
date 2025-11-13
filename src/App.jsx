@@ -71,12 +71,12 @@ export default function App() {
           onClick={() => signOut(auth)}
           style={{ ...buttonStyle, backgroundColor: '#d32f2f' }}
         >
-          Cerrar sesión
+          Cerrar sesiÃ³n
         </button>
       </div>
 
       <section style={sectionStyle}>
-        <h2>Añadir Producto</h2>
+        <h2>AÃ±adir Producto</h2>
         <ProductForm />
       </section>
 
