@@ -16,7 +16,6 @@ export default function App() {
 
   if (!user) return <Login onLogin={() => {}} />;
 
-  // ===== Estilos =====
   const containerStyle = {
     maxWidth: 900,
     margin: '24px auto',
@@ -46,6 +45,7 @@ export default function App() {
     padding: 8,
     borderRadius: 4,
     border: '1px solid #ccc',
+    minWidth: 120,
   };
 
   const buttonStyle = {
@@ -62,13 +62,15 @@ export default function App() {
     marginBottom: 12,
   };
 
-  // ===== Render =====
   return (
     <div style={containerStyle}>
       <h1 style={headerStyle}>Gestor de Precios</h1>
 
       <div style={logoutStyle}>
-        <button onClick={() => signOut(auth)} style={{ ...buttonStyle, backgroundColor: '#d32f2f' }}>
+        <button
+          onClick={() => signOut(auth)}
+          style={{ ...buttonStyle, backgroundColor: '#d32f2f' }}
+        >
           Cerrar sesión
         </button>
       </div>
