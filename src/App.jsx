@@ -30,7 +30,7 @@ export default function App() {
       </section>
 
       <section style={{ margin: '16px 0', padding: 12, border: '1px solid #ddd', borderRadius: 8 }}>
-        <h2>Filtros</h2>
+        <h2>Buscar producto</h2>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <input
             placeholder="Filtrar por nombre (parte del nombre)"
