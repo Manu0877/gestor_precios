@@ -8,7 +8,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 export default function App() {
   const [user, setUser] = useState(null)
   const [filterName, setFilterName] = useState('')
-  const [filterMarket, setFilterMarket] = useState('')
+  
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, setUser)
@@ -46,7 +46,7 @@ export default function App() {
       </section>
 
       <section style={{ margin: '16px 0' }}>
-        <ProductList filterName={filterName} filterMarket={filterMarket} />
+        <ProductList filterName={filterName} />
       </section>
     </div>
   )
