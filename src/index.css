@@ -1,0 +1,4 @@
+body { background: #fafafa; margin: 0; }
+input, button { padding: 8px; border: 1px solid #ccc; border-radius: 6px }
+input:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.03) }
+button { cursor: pointer; }
