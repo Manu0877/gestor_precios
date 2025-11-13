@@ -15,7 +15,7 @@ export default function ProductList({ filterName }) {
     fetchProducts();
   }, []);
 
-  // Filtrar productos por nombre (parcial, insensible a mayÃºsculas)
+  // Filtrar productos por nombre (parcial, insensible a mayúsculas)
   const productosFiltrados = productos.filter(p =>
     p.nombre.toLowerCase().includes(filterName.toLowerCase())
   );

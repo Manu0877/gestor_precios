@@ -29,9 +29,9 @@ export default function ProductForm() {
       setPrecio("");
       setSupermercado("");
       setFechaCompra("");
-      alert("Producto aÃ±adido correctamente");
+      alert("Producto añadido correctamente");
     } catch (error) {
-      console.error("Error al aÃ±adir producto:", error);
+      console.error("Error al añadir producto:", error);
     }
   };
 
@@ -79,7 +79,7 @@ export default function ProductForm() {
           cursor: "pointer",
         }}
       >
-        AÃ±adir producto
+        Añadir producto
       </button>
     </form>
   );
